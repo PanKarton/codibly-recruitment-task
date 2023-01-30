@@ -7,6 +7,7 @@ type Props = {
 
 type Context = {
   colorsData: ColorElement[];
+  setPageIndex: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const ColorsDataContext = createContext<Context | null>(null);
@@ -15,11 +16,16 @@ const pageSize = 5;
 
 export const ColorsDataProvider = ({ children }: Props) => {
   const [colorsData, setColorsData] = useState([]);
+  const [pageIndex, setPageIndex] = useState(0);
 
   useEffect(() => {
     const fetchFirstPageOfColors = async () => {
       try {
-        const response = await fetch(`https://reqres.in/api/products?page=1&per_page=${pageSize}`);
+        console.log(pageIndex);
+
+        const response = await fetch(
+          `https://reqres.in/api/products?page=${pageIndex}&per_page=${pageSize}`
+        );
         const data = await response.json();
 
         setColorsData(data.data);
@@ -28,10 +34,11 @@ export const ColorsDataProvider = ({ children }: Props) => {
       }
     };
     fetchFirstPageOfColors();
-  }, []);
+  }, [pageIndex]);
 
   const contextData = {
     colorsData,
+    setPageIndex,
   };
 
   return <ColorsDataContext.Provider value={contextData}>{children}</ColorsDataContext.Provider>;

@@ -1,15 +1,14 @@
 import './App.css';
 import React from 'react';
-import { useColorsData } from 'src/providers/ColorsProvider';
+import { Route, Routes } from 'react-router';
+import { Dashboard } from './components/Dashboard';
 
 export function App() {
-  const colors = useColorsData();
-
   return (
     <div className="App">
-      {colors.colorsData.map((color, index) => (
-        <div key={index}>{`${color.name}, ${color.year}, ${color.pantone_value}`}</div>
-      ))}
+      <Routes>
+        <Route path="/:pageIndex" element={<Dashboard />} />
+      </Routes>
     </div>
   );
 }
