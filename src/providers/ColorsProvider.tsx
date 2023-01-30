@@ -1,21 +1,33 @@
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { ColorElement } from 'types/colors-response';
 
 type Props = {
   children: ReactNode;
 };
 
 type Context = {
-  colorsData: string;
+  colorsData: ColorElement[];
 };
 
 const ColorsDataContext = createContext<Context | null>(null);
 
+const pageSize = 5;
+
 export const ColorsDataProvider = ({ children }: Props) => {
-  const [colorsData, setColorsData] = useState('');
-  // const [currentPage, setCurrentPage] = useState(1);
+  const [colorsData, setColorsData] = useState([]);
 
   useEffect(() => {
-    setColorsData('siema');
+    const fetchFirstPageOfColors = async () => {
+      try {
+        const response = await fetch(`https://reqres.in/api/products?page=1&per_page=${pageSize}`);
+        const data = await response.json();
+
+        setColorsData(data.data);
+      } catch (err) {
+        console.log({ err });
+      }
+    };
+    fetchFirstPageOfColors();
   }, []);
 
   const contextData = {
