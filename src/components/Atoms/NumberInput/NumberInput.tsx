@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRef } from 'react';
-import styled from 'styled-components';
+import TextField from '@mui/material/TextField';
 
 export const NumberInput = () => {
   const ref = useRef<HTMLInputElement>(null);
@@ -11,13 +11,18 @@ export const NumberInput = () => {
   const handleOnChange = () => {
     if (ref === null || ref.current === null) return;
     const colorId = parseInt(ref.current.value);
-
     colorId > 0 ? navigate(`/color/${colorId}`) : navigate(`/colors/1`);
   };
 
-  return <StyledInput ref={ref} type="number" min={0} onChange={handleOnChange} value={colorId} />;
+  return (
+    <TextField
+      label="Color id"
+      variant="outlined"
+      inputRef={ref}
+      inputProps={{ min: 0 }}
+      type="number"
+      onChange={handleOnChange}
+      value={colorId}
+    />
+  );
 };
-
-const StyledInput = styled.input`
-  height: 2rem;
-`;

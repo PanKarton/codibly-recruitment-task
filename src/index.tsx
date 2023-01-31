@@ -2,19 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { createBrowserRouter, Link, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { AppProvider } from './providers/AppProvider';
 import { Error } from './components/Molecules/Error';
 import { SingleColor } from './components/Molecules/SingleColor';
-import { DashboardTemplate } from './components/Templates/DashboardTemplate';
+import { DashboardTemplate } from './components/Templates/DashboardTemplate/DashboardTemplate';
 import { ColorsTable } from './components/Molecules/ColorsTable';
+import { Home } from './components/Atoms/Home/Home';
 
 export const pageSize = 5;
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Link to="/colors/1">Load colors</Link>,
+    element: <Home />,
   },
   {
     path: '/colors/:pageIndex',

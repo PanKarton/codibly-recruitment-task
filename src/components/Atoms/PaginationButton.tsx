@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
 
 type Props = {
   children: string;
@@ -7,5 +8,9 @@ type Props = {
 };
 
 export const PaginationButton = ({ children, toUrl }: Props) => {
-  return <Link to={toUrl}>{children}</Link>;
+  return (
+    <Button component={Link} to={toUrl} variant="outlined" color="secondary">
+      {children}
+    </Button>
+  );
 };
