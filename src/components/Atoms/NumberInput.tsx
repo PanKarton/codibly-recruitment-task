@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRef } from 'react';
+import styled from 'styled-components';
 
 export const NumberInput = () => {
   const ref = useRef<HTMLInputElement>(null);
@@ -14,5 +15,9 @@ export const NumberInput = () => {
     colorId > 0 ? navigate(`/color/${colorId}`) : navigate(`/colors/1`);
   };
 
-  return <input ref={ref} type="number" min={0} onChange={handleOnChange} value={colorId} />;
+  return <StyledInput ref={ref} type="number" min={0} onChange={handleOnChange} value={colorId} />;
 };
+
+const StyledInput = styled.input`
+  height: 2rem;
+`;
