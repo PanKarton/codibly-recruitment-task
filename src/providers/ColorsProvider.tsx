@@ -1,44 +1,36 @@
-import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import { ColorElement } from 'types/colors-response';
+import React, { createContext, ReactNode, useContext } from 'react';
+import { useLoaderData } from 'react-router';
+import { useNavigate } from 'react-router-dom';
+import { ColorsResponse } from 'types/colors-array-response';
 
 type Props = {
   children: ReactNode;
 };
 
+type LoaderData = {
+  colorsData: ColorsResponse;
+};
+
 type Context = {
-  colorsData: ColorElement[];
-  setPageIndex: React.Dispatch<React.SetStateAction<number>>;
+  colorsData: ColorsResponse;
+  handleOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const ColorsDataContext = createContext<Context | null>(null);
 
-const pageSize = 5;
-
 export const ColorsDataProvider = ({ children }: Props) => {
-  const [colorsData, setColorsData] = useState([]);
-  const [pageIndex, setPageIndex] = useState(0);
+  const { colorsData } = useLoaderData() as LoaderData;
 
-  useEffect(() => {
-    const fetchFirstPageOfColors = async () => {
-      try {
-        console.log(pageIndex);
+  const navigate = useNavigate();
 
-        const response = await fetch(
-          `https://reqres.in/api/products?page=${pageIndex}&per_page=${pageSize}`
-        );
-        const data = await response.json();
-
-        setColorsData(data.data);
-      } catch (err) {
-        console.log({ err });
-      }
-    };
-    fetchFirstPageOfColors();
-  }, [pageIndex]);
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const colorId = event?.currentTarget?.value;
+    colorId ? navigate(`/color/${colorId}`) : navigate(`/colors/1`);
+  };
 
   const contextData = {
     colorsData,
-    setPageIndex,
+    handleOnChange,
   };
 
   return <ColorsDataContext.Provider value={contextData}>{children}</ColorsDataContext.Provider>;

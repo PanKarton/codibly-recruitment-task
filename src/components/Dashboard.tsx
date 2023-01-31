@@ -1,28 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useColorsData } from 'src/providers/ColorsProvider';
-import { useParams } from 'react-router';
+import { ColorsTable } from './ColorsTable';
 
 export const Dashboard = () => {
-  const { colorsData, setPageIndex } = useColorsData();
-  const { pageIndex } = useParams();
-
-  useEffect(() => {
-    console.log(pageIndex);
-
-    if (!pageIndex) return;
-    // Must check if index is string. If not, throw 404
-    setPageIndex(() => parseInt(pageIndex));
-  }, [pageIndex]);
+  const { colorsData, handleOnChange } = useColorsData();
 
   return (
     <main>
-        <ul>
-      {colorsData.map(color => (
-        <li key={color.id}>{`${color.name}`}</li>
-      ))}
-    </ul>
-    <button>Previous</button>
-    <button>Next</button>
+      <input type="number" onChange={handleOnChange} />
+      <ColorsTable colorsData={colorsData.data} index={colorsData.page} />
     </main>
   );
 };
