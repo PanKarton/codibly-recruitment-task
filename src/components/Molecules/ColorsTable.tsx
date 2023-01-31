@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { pageSize } from 'src';
 import { PaginationButton } from '../Atoms/PaginationButton';
 import { useColorsData } from 'src/providers/ColorsProvider';
+import { Link } from 'react-router-dom';
 
 export const ColorsTable = () => {
   const {
@@ -28,6 +28,7 @@ export const ColorsTable = () => {
           </div>
         )}
       </div>
+
       {isLeftLinkActive && (
         <PaginationButton toUrl={`/colors/${page - 1}`}>Previous</PaginationButton>
       )}
