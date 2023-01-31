@@ -11,5 +11,8 @@ export const ContentWrapper = styled.section`
     border-radius: 1rem;
     padding: 1rem;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 0.375rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 `;
