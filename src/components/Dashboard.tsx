@@ -15,10 +15,14 @@ export const Dashboard = () => {
   }, [pageIndex]);
 
   return (
-    <ul>
+    <main>
+        <ul>
       {colorsData.map(color => (
         <li key={color.id}>{`${color.name}`}</li>
       ))}
     </ul>
+    <button>Previous</button>
+    <button>Next</button>
+    </main>
   );
 };
