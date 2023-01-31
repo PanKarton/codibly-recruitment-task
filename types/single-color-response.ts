@@ -1,13 +1,9 @@
-export interface ColorsResponse {
-  page: number;
-  per_page: number;
-  total: number;
-  total_pages: number;
-  data: ColorElement[];
+export interface SingleColorResponse {
+  data: Data;
   support: Support;
 }
 
-export interface ColorElement {
+export interface Data {
   id: number;
   name: string;
   year: number;
