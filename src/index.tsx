@@ -4,11 +4,11 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { AppProvider } from './providers/AppProvider';
-import { Error } from './components/Molecules/Error';
 import { SingleColor } from './components/Molecules/SingleColor';
 import { DashboardTemplate } from './components/Templates/DashboardTemplate';
 import { ColorsTable } from './components/Molecules/ColorsTable';
 import { Home } from './components/Atoms/Home';
+import { PageNotFoundMessage } from './components/Atoms/PageNotFoundMessage';
 
 export const pageSize = 5;
 
@@ -39,10 +39,12 @@ const router = createBrowserRouter([
           colorsData,
         };
       } catch (err) {
-        console.log({ err });
+        console.log('brak koloruw', { err });
+        return {
+          colorsData: null,
+        };
       }
     },
-    errorElement: <Error />,
   },
   {
     path: '/color/:colorId',
@@ -63,14 +65,16 @@ const router = createBrowserRouter([
           colorId,
         };
       } catch (err) {
-        console.log({ err });
+        console.log('brak jednego koloru', { err });
+        return {
+          colorsData: null,
+        };
       }
     },
-    errorElement: <Error />,
   },
   {
     path: '*',
-    element: <Error />,
+    element: <PageNotFoundMessage />,
   },
 ]);
 

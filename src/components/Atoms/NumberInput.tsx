@@ -16,7 +16,7 @@ export const NumberInput = () => {
 
   return (
     <TextField
-      label="Color id"
+      label="Search color by id"
       variant="outlined"
       inputRef={ref}
       inputProps={{ min: 0 }}

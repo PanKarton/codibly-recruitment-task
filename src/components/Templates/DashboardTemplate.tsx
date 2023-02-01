@@ -1,5 +1,6 @@
+import { Stack } from '@mui/system';
 import React, { ReactNode } from 'react';
-import { ContentWrapper } from 'src/components/Atoms/ContentWrapper.styles';
+import { ContentWrapper } from 'src/components/Atoms/ContentWrapper';
 import { NumberInput } from '../Atoms/NumberInput';
 
 type Props = {
@@ -10,10 +11,10 @@ export const DashboardTemplate = ({ children }: Props) => {
   return (
     <main>
       <ContentWrapper>
-        <div className="content-wrapper">
+        <Stack spacing={2}>
           <NumberInput />
           {children}
-        </div>
+        </Stack>
       </ContentWrapper>
     </main>
   );

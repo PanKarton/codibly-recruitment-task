@@ -6,9 +6,10 @@ type Props = {
   children: ReactNode;
   toUrl: string;
   isDisabled?: boolean;
+  isBig?: boolean;
 };
 
-export const LinkButton = ({ children, toUrl, isDisabled }: Props) => {
+export const LinkButton = ({ children, toUrl, isDisabled, isBig }: Props) => {
   return (
     <Button
       disabled={isDisabled}
@@ -17,8 +18,8 @@ export const LinkButton = ({ children, toUrl, isDisabled }: Props) => {
       variant="outlined"
       color="secondary"
       style={{
-        width: '100%',
-        paddingBlock: '1rem',
+        width: isBig ? '100%' : 'auto',
+        paddingBlock: isBig ? '1rem' : '.25rem',
         fontSize: '1rem',
         textTransform: 'none',
       }}

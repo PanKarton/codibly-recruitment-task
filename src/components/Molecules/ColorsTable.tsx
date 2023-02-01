@@ -2,73 +2,41 @@ import React from 'react';
 import { pageSize } from 'src';
 import { LinkButton } from '../Atoms/LinkButton';
 import { useColorsData } from 'src/providers/ColorsProvider';
-//
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-//
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIos from '@mui/icons-material/ArrowForwardIos';
 import Grid from '@mui/material/Grid';
+import { ColorTableWihHead } from '../Atoms/ColorTableWihHead';
+import { ColorTableRow } from '../Atoms/ColorTableRow';
+import { NoConnectionMessage } from '../Atoms/NoConnectionMessage';
 
 export const ColorsTable = () => {
-  const {
-    colorsData: { page, data },
-  } = useColorsData();
+  const { colorsData } = useColorsData();
+
+  if (colorsData === null) return <NoConnectionMessage />;
+
+  const { page, data } = colorsData;
 
   const isLeftButtonDisabled = !page || page <= 1 || data.length === 0;
   const isRightButtonDisabled = !page || data.length === 0 || data.length !== pageSize;
 
   return (
     <>
-      <TableContainer component={Paper} style={{ border: '1px solid #ccc', borderBottom: 'none' }}>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Color id</TableCell>
-              <TableCell align="right">Name</TableCell>
-              <TableCell align="right">Year</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map(color => (
-              <TableRow
-                key={color.id}
-                style={{
-                  backgroundColor: color.color,
-                  cursor: 'pointer',
-                }}
-                sx={{
-                  '&:last-child td, &:last-child th': { border: 0 },
-                  ':hover': { filter: 'brightness(95%)', transition: 'all 0.125s' },
-                }}
-              >
-                <TableCell component="th" scope="row">
-                  {color.id}
-                </TableCell>
-                <TableCell align="right">{color.name}</TableCell>
-                <TableCell align="right">{color.year}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-
-      <Grid container columnSpacing={1}>
-        <Grid item xs={6}>
+      <ColorTableWihHead>
+        {data.map(({ id, color, name, year }) => (
+          <ColorTableRow key={id} color={color} name={name} year={year} id={id} />
+        ))}
+      </ColorTableWihHead>
+      <Grid container maxWidth="37.125rem" spacing={2} justifyContent="space-between">
+        <Grid item xs={5.8} style={{ paddingLeft: '0' }}>
           {page && (
-            <LinkButton isDisabled={isLeftButtonDisabled} toUrl={`/colors/${page - 1}`}>
+            <LinkButton isBig isDisabled={isLeftButtonDisabled} toUrl={`/colors/${page - 1}`}>
               <ArrowBackIosIcon />
             </LinkButton>
           )}
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={5.8} style={{ paddingLeft: '0' }}>
           {page && (
-            <LinkButton isDisabled={isRightButtonDisabled} toUrl={`/colors/${page + 1}`}>
+            <LinkButton isBig isDisabled={isRightButtonDisabled} toUrl={`/colors/${page + 1}`}>
               <ArrowForwardIos />
             </LinkButton>
           )}
