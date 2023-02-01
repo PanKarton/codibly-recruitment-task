@@ -13,10 +13,10 @@ export const PageNotFoundMessage = () => {
         minHeight: '100vh',
       }}
     >
-      <Typography variant="h1" style={{ color: '#303030' }}>
+      <Typography variant="h1" sx={{ color: '#303030' }}>
         404
       </Typography>
-      <Typography variant="h6" style={{ color: '#303030' }}>
+      <Typography variant="h6" sx={{ color: '#303030' }}>
         The page you’re looking for doesn’t exist.
       </Typography>
       <Box sx={{ mt: 2 }}>

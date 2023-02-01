@@ -31,7 +31,7 @@ export const ColorsTable = () => {
         maxWidth="37.125rem"
         spacing={2}
         justifyContent="space-between"
-        style={{ position: 'absolute', bottom: '1.5rem' }}
+        sx={{ position: 'absolute', bottom: '1.5rem' }}
       >
         <Grid item xs={5.8} style={{ paddingLeft: '0' }}>
           {page && (

@@ -17,7 +17,7 @@ export const LinkButton = ({ children, toUrl, isDisabled, isBig }: Props) => {
       to={toUrl}
       variant="outlined"
       color="secondary"
-      style={{
+      sx={{
         width: isBig ? '100%' : 'auto',
         paddingBlock: isBig ? '1rem' : '.25rem',
         fontSize: '1rem',

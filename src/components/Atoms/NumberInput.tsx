@@ -23,7 +23,7 @@ export const NumberInput = () => {
       type="number"
       onChange={handleOnChange}
       value={colorId}
-      style={{ maxWidth: '15rem' }}
+      sx={{ maxWidth: '15rem' }}
     />
   );
 };

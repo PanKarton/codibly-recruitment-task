@@ -13,7 +13,7 @@ type Props = {
 
 export const ColorTableWihHead = ({ children }: Props) => {
   return (
-    <TableContainer component={Paper} style={{ border: '1px solid #ccc', borderBottom: 'none' }}>
+    <TableContainer component={Paper} sx={{ border: '1px solid #ccc', borderBottom: 'none' }}>
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
