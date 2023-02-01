@@ -2,12 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import { AppProvider } from './providers/AppProvider';
 import { SingleColor } from './components/Molecules/SingleColor';
 import { DashboardTemplate } from './components/Templates/DashboardTemplate';
 import { ColorsTable } from './components/Molecules/ColorsTable';
-import { Home } from './components/Atoms/Home';
 import { PageNotFoundMessage } from './components/Atoms/PageNotFoundMessage';
 
 export const pageSize = 5;
@@ -15,7 +14,7 @@ export const pageSize = 5;
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Home />,
+    element: <Navigate to="/colors/1" replace={true} />,
   },
   {
     path: '/colors/:pageIndex',
@@ -39,7 +38,6 @@ const router = createBrowserRouter([
           colorsData,
         };
       } catch (err) {
-        console.log('brak koloruw', { err });
         return {
           colorsData: null,
         };
@@ -65,7 +63,6 @@ const router = createBrowserRouter([
           colorId,
         };
       } catch (err) {
-        console.log('brak jednego koloru', { err });
         return {
           colorsData: null,
         };

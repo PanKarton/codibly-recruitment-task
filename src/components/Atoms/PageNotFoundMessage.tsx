@@ -20,7 +20,7 @@ export const PageNotFoundMessage = () => {
         The page you’re looking for doesn’t exist.
       </Typography>
       <Box sx={{ mt: 2 }}>
-        <LinkButton toUrl="/">Back Home</LinkButton>
+        <LinkButton toUrl="/colors/1">Back to colors list</LinkButton>
       </Box>
     </Box>
   );
