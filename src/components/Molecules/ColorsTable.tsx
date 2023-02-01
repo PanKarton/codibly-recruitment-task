@@ -1,6 +1,6 @@
 import React from 'react';
 import { pageSize } from 'src';
-import { PaginationButton } from '../Atoms/PaginationButton';
+import { LinkButton } from '../Atoms/LinkButton';
 import { useColorsData } from 'src/providers/ColorsProvider';
 //
 import Table from '@mui/material/Table';
@@ -25,7 +25,7 @@ export const ColorsTable = () => {
 
   return (
     <>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} style={{ border: '1px solid #ccc', borderBottom: 'none' }}>
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -61,16 +61,16 @@ export const ColorsTable = () => {
       <Grid container columnSpacing={1}>
         <Grid item xs={6}>
           {page && (
-            <PaginationButton isDisabled={isLeftButtonDisabled} toUrl={`/colors/${page - 1}`}>
+            <LinkButton isDisabled={isLeftButtonDisabled} toUrl={`/colors/${page - 1}`}>
               <ArrowBackIosIcon />
-            </PaginationButton>
+            </LinkButton>
           )}
         </Grid>
         <Grid item xs={6}>
           {page && (
-            <PaginationButton isDisabled={isRightButtonDisabled} toUrl={`/colors/${page + 1}`}>
+            <LinkButton isDisabled={isRightButtonDisabled} toUrl={`/colors/${page + 1}`}>
               <ArrowForwardIos />
-            </PaginationButton>
+            </LinkButton>
           )}
         </Grid>
       </Grid>

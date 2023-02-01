@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ContentWrapper } from '../ContentWrapper/ContentWrapper.styles';
+import { ContentWrapper } from './ContentWrapper.styles';
 import Button from '@mui/material/Button';
 
 export const Home = () => {

@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
-import { ContentWrapper } from 'src/components/Atoms/ContentWrapper/ContentWrapper.styles';
-import { NumberInput } from '../../Atoms/NumberInput/NumberInput';
+import { ContentWrapper } from 'src/components/Atoms/ContentWrapper.styles';
+import { NumberInput } from '../Atoms/NumberInput';
 
 type Props = {
   children: ReactNode;

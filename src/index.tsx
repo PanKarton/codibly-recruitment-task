@@ -6,9 +6,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { AppProvider } from './providers/AppProvider';
 import { Error } from './components/Molecules/Error';
 import { SingleColor } from './components/Molecules/SingleColor';
-import { DashboardTemplate } from './components/Templates/DashboardTemplate/DashboardTemplate';
+import { DashboardTemplate } from './components/Templates/DashboardTemplate';
 import { ColorsTable } from './components/Molecules/ColorsTable';
-import { Home } from './components/Atoms/Home/Home';
+import { Home } from './components/Atoms/Home';
 
 export const pageSize = 5;
 

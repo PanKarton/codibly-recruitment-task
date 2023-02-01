@@ -5,10 +5,10 @@ import Button from '@mui/material/Button';
 type Props = {
   children: ReactNode;
   toUrl: string;
-  isDisabled: boolean;
+  isDisabled?: boolean;
 };
 
-export const PaginationButton = ({ children, toUrl, isDisabled }: Props) => {
+export const LinkButton = ({ children, toUrl, isDisabled }: Props) => {
   return (
     <Button
       disabled={isDisabled}
@@ -16,7 +16,12 @@ export const PaginationButton = ({ children, toUrl, isDisabled }: Props) => {
       to={toUrl}
       variant="outlined"
       color="secondary"
-      style={{ width: '100%' }}
+      style={{
+        width: '100%',
+        paddingBlock: '1rem',
+        fontSize: '1rem',
+        textTransform: 'none',
+      }}
     >
       {children}
     </Button>
