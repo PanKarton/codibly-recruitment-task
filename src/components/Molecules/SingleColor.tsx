@@ -6,6 +6,7 @@ import { LinkButton } from '../Atoms/LinkButton';
 import { Stack } from '@mui/system';
 import { ColorTableWihHead } from '../Atoms/ColorTableWihHead';
 import { ColorTableRow } from '../Atoms/ColorTableRow';
+import { Box } from '@mui/material';
 
 type LoaderData = {
   colorData: SingleColorResponse;
@@ -23,9 +24,11 @@ export const SingleColor = () => {
       <ColorTableWihHead>
         <ColorTableRow color={color} name={name} year={year} id={id} />
       </ColorTableWihHead>
-      <LinkButton isBig toUrl="/colors/1">
-        Back to colors list
-      </LinkButton>
+      <Box sx={{ position: 'absolute', inset: 'auto 1.5rem 1.5rem 1.5rem' }}>
+        <LinkButton isBig toUrl="/colors/1">
+          Back to colors list
+        </LinkButton>
+      </Box>
     </Stack>
   );
 };

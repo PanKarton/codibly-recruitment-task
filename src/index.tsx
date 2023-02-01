@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         return {
           colorsData,
         };
-      } catch (err) {
+      } catch {
         return {
           colorsData: null,
         };
@@ -62,7 +62,7 @@ const router = createBrowserRouter([
           colorData: data,
           colorId,
         };
-      } catch (err) {
+      } catch {
         return {
           colorsData: null,
         };

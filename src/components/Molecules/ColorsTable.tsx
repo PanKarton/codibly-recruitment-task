@@ -26,7 +26,13 @@ export const ColorsTable = () => {
           <ColorTableRow key={id} color={color} name={name} year={year} id={id} />
         ))}
       </ColorTableWihHead>
-      <Grid container maxWidth="37.125rem" spacing={2} justifyContent="space-between">
+      <Grid
+        container
+        maxWidth="37.125rem"
+        spacing={2}
+        justifyContent="space-between"
+        style={{ position: 'absolute', bottom: '1.5rem' }}
+      >
         <Grid item xs={5.8} style={{ paddingLeft: '0' }}>
           {page && (
             <LinkButton isBig isDisabled={isLeftButtonDisabled} toUrl={`/colors/${page - 1}`}>

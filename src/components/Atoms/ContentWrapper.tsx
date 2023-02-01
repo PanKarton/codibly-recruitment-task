@@ -5,12 +5,6 @@ type Props = {
   children: ReactNode;
 };
 
-const paperStyles = {
-  padding: '1rem',
-  minWidth: '37rem',
-  minHeight: '30rem',
-};
-
 export const ContentWrapper = ({ children }: Props) => {
   return (
     <Grid
@@ -21,8 +15,8 @@ export const ContentWrapper = ({ children }: Props) => {
       justifyContent="center"
       style={{ minHeight: '100vh' }}
     >
-      <Grid item>
-        <Paper elevation={3} style={paperStyles}>
+      <Grid item sx={{ width: 'min(90%, 40rem)' }}>
+        <Paper elevation={3} sx={{ position: 'relative', padding: '1.5rem', minHeight: '30rem' }}>
           {children}
         </Paper>
       </Grid>
