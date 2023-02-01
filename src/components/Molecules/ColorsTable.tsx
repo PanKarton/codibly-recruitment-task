@@ -1,37 +1,53 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { pageSize } from 'src';
-import { PaginationButton } from '../Atoms/PaginationButton';
+import { LinkButton } from '../Atoms/LinkButton';
 import { useColorsData } from 'src/providers/ColorsProvider';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIos from '@mui/icons-material/ArrowForwardIos';
+import Grid from '@mui/material/Grid';
+import { ColorTableWihHead } from '../Atoms/ColorTableWihHead';
+import { ColorTableRow } from '../Atoms/ColorTableRow';
+import { NoConnectionMessage } from '../Atoms/NoConnectionMessage';
 
 export const ColorsTable = () => {
-  const {
-    colorsData: { page, data },
-  } = useColorsData();
+  const { colorsData } = useColorsData();
 
-  const isLeftLinkActive = page && page > 1 && data.length != 0;
-  const isRightLinkActive = page && data.length != 0 && data.length === pageSize;
+  if (colorsData === null) return <NoConnectionMessage />;
+
+  const { page, data } = colorsData;
+
+  const isLeftButtonDisabled = !page || page <= 1 || data.length === 0;
+  const isRightButtonDisabled = !page || data.length === 0 || data.length !== pageSize;
 
   return (
     <>
-      <div>
-        {data.length ? (
-          <ul>
-            {data.map(color => (
-              <li key={color.id}>{`${color.name}`}</li>
-            ))}
-          </ul>
-        ) : (
-          <div>
-            <p>Aint no items</p>
-            <Link to="/">Home page</Link>
-          </div>
-        )}
-      </div>
-      {isLeftLinkActive && (
-        <PaginationButton toUrl={`/colors/${page - 1}`}>Previous</PaginationButton>
-      )}
-      {isRightLinkActive && <PaginationButton toUrl={`/colors/${page + 1}`}>Next</PaginationButton>}
+      <ColorTableWihHead>
+        {data.map(({ id, color, name, year }) => (
+          <ColorTableRow key={id} color={color} name={name} year={year} id={id} />
+        ))}
+      </ColorTableWihHead>
+      <Grid
+        container
+        maxWidth="37.125rem"
+        spacing={2}
+        justifyContent="space-between"
+        sx={{ position: 'absolute', bottom: '1.5rem' }}
+      >
+        <Grid item xs={5.8} style={{ paddingLeft: '0' }}>
+          {page && (
+            <LinkButton isBig isDisabled={isLeftButtonDisabled} toUrl={`/colors/${page - 1}`}>
+              <ArrowBackIosIcon />
+            </LinkButton>
+          )}
+        </Grid>
+        <Grid item xs={5.8} style={{ paddingLeft: '0' }}>
+          {page && (
+            <LinkButton isBig isDisabled={isRightButtonDisabled} toUrl={`/colors/${page + 1}`}>
+              <ArrowForwardIos />
+            </LinkButton>
+          )}
+        </Grid>
+      </Grid>
     </>
   );
 };

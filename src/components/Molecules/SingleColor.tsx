@@ -1,7 +1,12 @@
 import React from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import { SingleColorResponse } from 'types/single-color-response';
-import { Error } from './Error';
+import { ColorError } from '../Atoms/ColorError';
+import { LinkButton } from '../Atoms/LinkButton';
+import { Stack } from '@mui/system';
+import { ColorTableWihHead } from '../Atoms/ColorTableWihHead';
+import { ColorTableRow } from '../Atoms/ColorTableRow';
+import { Box } from '@mui/material';
 
 type LoaderData = {
   colorData: SingleColorResponse;
@@ -10,12 +15,20 @@ type LoaderData = {
 export const SingleColor = () => {
   const { colorData } = useLoaderData() as LoaderData;
 
-  if (!Object.keys(colorData).length) return <Error />;
+  if (!Object.keys(colorData).length) return <ColorError />;
+
+  const { id, color, year, name } = colorData.data;
 
   return (
-    <div>
-      <p>{`${colorData.data.name} - ${colorData.data.year}`}</p>
-      <Link to="/colors/1">colors list</Link>
-    </div>
+    <Stack gap={2}>
+      <ColorTableWihHead>
+        <ColorTableRow color={color} name={name} year={year} id={id} />
+      </ColorTableWihHead>
+      <Box sx={{ position: 'absolute', inset: 'auto 1.5rem 1.5rem 1.5rem' }}>
+        <LinkButton isBig toUrl="/colors/1">
+          Back to colors list
+        </LinkButton>
+      </Box>
+    </Stack>
   );
 };
