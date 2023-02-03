@@ -1,9 +1,9 @@
 export interface SingleColorResponse {
-  data: Data;
+  data: Color;
   support: Support;
 }
 
-export interface Data {
+export interface Color {
   id: number;
   name: string;
   year: number;
