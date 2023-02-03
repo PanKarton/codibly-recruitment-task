@@ -8,9 +8,12 @@ import Grid from '@mui/material/Grid';
 import { ColorTableWihHead } from '../Atoms/ColorTableWihHead';
 import { ColorTableRow } from '../Atoms/ColorTableRow';
 import { NoConnectionMessage } from '../Atoms/NoConnectionMessage';
+import { useModal } from 'src/providers/ModalProvider';
+import { ColorModal } from '../Atoms/ColorModal';
 
 export const ColorsTable = () => {
   const { colorsData } = useColorsData();
+  const { handleOpenModal } = useModal();
 
   if (colorsData === null) return <NoConnectionMessage />;
 
@@ -22,8 +25,15 @@ export const ColorsTable = () => {
   return (
     <>
       <ColorTableWihHead>
-        {data.map(({ id, color, name, year }) => (
-          <ColorTableRow key={id} color={color} name={name} year={year} id={id} />
+        {data.map(color => (
+          <ColorTableRow
+            key={color.id}
+            color={color.color}
+            name={color.name}
+            year={color.year}
+            id={color.id}
+            onClick={() => handleOpenModal(color)}
+          />
         ))}
       </ColorTableWihHead>
       <Grid
@@ -48,6 +58,7 @@ export const ColorsTable = () => {
           )}
         </Grid>
       </Grid>
+      <ColorModal />
     </>
   );
 };

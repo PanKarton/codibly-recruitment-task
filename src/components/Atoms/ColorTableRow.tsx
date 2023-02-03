@@ -7,9 +7,10 @@ type Props = {
   color: string;
   name: string;
   year: number;
+  onClick: () => void;
 };
 
-export const ColorTableRow = ({ id, color, name, year }: Props) => {
+export const ColorTableRow = ({ id, color, name, year, onClick }: Props) => {
   return (
     <TableRow
       sx={{
@@ -18,6 +19,7 @@ export const ColorTableRow = ({ id, color, name, year }: Props) => {
         backgroundColor: color,
         cursor: 'pointer',
       }}
+      onClick={onClick}
     >
       <TableCell component="th" scope="row">
         {id}
