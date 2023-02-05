@@ -5,7 +5,7 @@ import { DashboardTemplate } from './components/Templates/DashboardTemplate';
 import { ColorsTable } from './components/Molecules/ColorsTable/ColorsTable';
 import { PageNotFoundMessage } from './components/Atoms/PageNotFoundMessage';
 import { ModalProvider } from './providers/ModalProvider';
-import { SingleColor } from './components/Molecules/SingleColor';
+import { SingleColor } from './components/Molecules/SingleColor/SingleColor';
 
 export const router = createBrowserRouter([
   {

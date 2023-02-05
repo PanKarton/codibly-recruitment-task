@@ -9,16 +9,13 @@ import { ColorTableRow } from '../../Atoms/ColorTableRow';
 import { NoConnectionMessage } from '../../Atoms/NoConnectionMessage';
 import { useModal } from 'src/providers/ModalProvider';
 import { ColorModal } from '../../Atoms/ColorModal';
-import { ColorTableError } from '../../Atoms/ColorTableError';
-import { LoadingSpinner } from '../../Atoms/LoadingSpinner';
+import { ColorTableError } from '../../Atoms/ColorsTableError';
 
 export const ColorsTable = () => {
-  const { colorsData, isLoading } = useColorsData();
+  const { colorsData } = useColorsData();
   const { handleOpenModal } = useModal();
 
   const pageSize = 5;
-
-  if (isLoading) return <LoadingSpinner />;
 
   if (colorsData === null) return <NoConnectionMessage />;
 

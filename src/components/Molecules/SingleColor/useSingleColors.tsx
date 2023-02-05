@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { SingleColorResponse } from './../../../types/single-color-response';
+import { SingleColorResponse } from '../../../../types/single-color-response';
 export const useSingleColor = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [colorData, setColorData] = useState<SingleColorResponse | null | undefined>();
