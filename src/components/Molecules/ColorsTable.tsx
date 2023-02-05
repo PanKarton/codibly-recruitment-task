@@ -1,5 +1,4 @@
 import React from 'react';
-import { pageSize } from 'src';
 import { LinkButton } from '../Atoms/LinkButton';
 import { useColorsData } from 'src/providers/ColorsProvider';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -10,10 +9,16 @@ import { ColorTableRow } from '../Atoms/ColorTableRow';
 import { NoConnectionMessage } from '../Atoms/NoConnectionMessage';
 import { useModal } from 'src/providers/ModalProvider';
 import { ColorModal } from '../Atoms/ColorModal';
+import { ColorTableError } from './../Atoms/ColorTableError';
+import { LoadingSpinner } from '../Atoms/LoadingSpinner';
 
 export const ColorsTable = () => {
-  const { colorsData } = useColorsData();
+  const { colorsData, isLoading } = useColorsData();
   const { handleOpenModal } = useModal();
+
+  const pageSize = 5;
+
+  if (isLoading) return <LoadingSpinner />;
 
   if (colorsData === null) return <NoConnectionMessage />;
 
@@ -24,18 +29,22 @@ export const ColorsTable = () => {
 
   return (
     <>
-      <ColorTableWihHead>
-        {data.map(color => (
-          <ColorTableRow
-            key={color.id}
-            color={color.color}
-            name={color.name}
-            year={color.year}
-            id={color.id}
-            onClick={() => handleOpenModal(color)}
-          />
-        ))}
-      </ColorTableWihHead>
+      {data.length !== 0 ? (
+        <ColorTableWihHead>
+          {data.map(color => (
+            <ColorTableRow
+              key={color.id}
+              color={color.color}
+              name={color.name}
+              year={color.year}
+              id={color.id}
+              onClick={() => handleOpenModal(color)}
+            />
+          ))}
+        </ColorTableWihHead>
+      ) : (
+        <ColorTableError />
+      )}
       <Grid
         container
         maxWidth="37.125rem"
