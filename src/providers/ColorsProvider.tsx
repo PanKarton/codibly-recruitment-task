@@ -8,6 +8,7 @@ type Props = {
 
 type Context = {
   colorsData: ColorsResponse | null;
+  isLoading: boolean;
 };
 
 const pageSize = 5;
@@ -28,11 +29,13 @@ const initColorsState = {
 
 export const ColorsDataProvider = ({ children }: Props) => {
   const [colorsData, setColorsData] = useState<ColorsResponse | null>(initColorsState);
+  const [isLoading, setIsLoading] = useState(false);
   const { pageIndex } = useParams();
 
   useEffect(() => {
     const fetchColors = async () => {
       try {
+        setIsLoading(true);
         if (!pageIndex) return setColorsData(null);
 
         const response = await fetch(
@@ -42,7 +45,9 @@ export const ColorsDataProvider = ({ children }: Props) => {
         const colorsData = await response.json();
 
         setColorsData(colorsData);
+        setIsLoading(false);
       } catch (err) {
+        setIsLoading(false);
         setColorsData(null);
       }
     };
@@ -51,6 +56,7 @@ export const ColorsDataProvider = ({ children }: Props) => {
   }, [pageIndex]);
 
   const contextData = {
+    isLoading,
     colorsData,
   };
 

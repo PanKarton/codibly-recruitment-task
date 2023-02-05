@@ -11,12 +11,15 @@ import { NoConnectionMessage } from '../Atoms/NoConnectionMessage';
 import { useModal } from 'src/providers/ModalProvider';
 import { ColorModal } from '../Atoms/ColorModal';
 import { ColorTableError } from './../Atoms/ColorTableError';
+import { LoadingSpinner } from '../Atoms/LoadingSpinner';
 
 export const ColorsTable = () => {
-  const { colorsData } = useColorsData();
+  const { colorsData, isLoading } = useColorsData();
   const { handleOpenModal } = useModal();
 
   const pageSize = 5;
+
+  if (isLoading) return <LoadingSpinner />;
 
   if (colorsData === null) return <NoConnectionMessage />;
 
