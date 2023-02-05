@@ -1,16 +1,16 @@
 import React from 'react';
-import { LinkButton } from '../Atoms/LinkButton';
+import { LinkButton } from '../../Atoms/LinkButton';
 import { useColorsData } from 'src/providers/ColorsProvider';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIos from '@mui/icons-material/ArrowForwardIos';
 import Grid from '@mui/material/Grid';
-import { ColorTableWihHead } from '../Atoms/ColorTableWihHead';
-import { ColorTableRow } from '../Atoms/ColorTableRow';
-import { NoConnectionMessage } from '../Atoms/NoConnectionMessage';
+import { ColorTableWihHead } from '../../Atoms/ColorTableWihHead';
+import { ColorTableRow } from '../../Atoms/ColorTableRow';
+import { NoConnectionMessage } from '../../Atoms/NoConnectionMessage';
 import { useModal } from 'src/providers/ModalProvider';
-import { ColorModal } from '../Atoms/ColorModal';
-import { ColorTableError } from './../Atoms/ColorTableError';
-import { LoadingSpinner } from '../Atoms/LoadingSpinner';
+import { ColorModal } from '../../Atoms/ColorModal';
+import { ColorTableError } from '../../Atoms/ColorTableError';
+import { LoadingSpinner } from '../../Atoms/LoadingSpinner';
 
 export const ColorsTable = () => {
   const { colorsData, isLoading } = useColorsData();
