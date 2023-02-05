@@ -1,5 +1,4 @@
 import React from 'react';
-import { pageSize } from 'src';
 import { LinkButton } from '../Atoms/LinkButton';
 import { useColorsData } from 'src/providers/ColorsProvider';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
