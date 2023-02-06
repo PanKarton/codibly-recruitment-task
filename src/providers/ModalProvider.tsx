@@ -22,7 +22,9 @@ export const ModalProvider = ({ children }: Props) => {
     setColorData(color);
     setIsOpen(true);
   }, []);
-  const handleCloseModal = useCallback(() => setIsOpen(false), []);
+  const handleCloseModal = useCallback(() => {
+    setIsOpen(false);
+  }, []);
 
   const contextData = {
     isOpen,

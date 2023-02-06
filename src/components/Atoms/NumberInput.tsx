@@ -24,6 +24,7 @@ export const NumberInput = () => {
       onChange={handleOnChange}
       value={colorId}
       sx={{ maxWidth: '15rem' }}
+      autoFocus
     />
   );
 };

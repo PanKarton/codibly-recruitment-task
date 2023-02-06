@@ -3,11 +3,15 @@ import { Box, Dialog, Paper, Typography } from '@mui/material';
 import { useModal } from 'src/providers/ModalProvider';
 import { capitalizeFirstLetter } from 'src/helpers/capitalizeFirstLetter';
 import fontColorContrast from 'font-color-contrast';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 export const ColorModal = () => {
   const { isOpen, colorData, handleCloseModal } = useModal();
 
   if (colorData === null) return null;
+
+  const contrastColor = fontColorContrast(colorData.color);
 
   return (
     <div>
@@ -28,11 +32,7 @@ export const ColorModal = () => {
               alignItems: 'flex-end',
             }}
           >
-            <Typography
-              variant="body1"
-              fontSize="3rem"
-              sx={{ color: fontColorContrast(colorData.color) }}
-            >
+            <Typography variant="body1" fontSize="3rem" sx={{ color: contrastColor }}>
               {colorData.color}
             </Typography>
           </Box>
@@ -58,6 +58,18 @@ export const ColorModal = () => {
               {`${colorData.pantone_value}`}
             </Typography>
           </Box>
+          <IconButton
+            aria-label="close"
+            onClick={handleCloseModal}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: contrastColor,
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
         </Paper>
       </Dialog>
     </div>

@@ -1,9 +1,9 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
 type Props = {
-  children: ReactNode;
+  children: string;
   toUrl: string;
   isDisabled?: boolean;
   isBig?: boolean;

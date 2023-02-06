@@ -18,6 +18,12 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/components/Molecules/ColorsTable/ColorsTable.test.js",
+    "src/components/Molecules/ColorsTable/ColorsTable.test.js"
+  ],
   "exclude": ["node_modules"]
 }

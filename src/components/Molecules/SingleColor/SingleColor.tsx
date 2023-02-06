@@ -1,14 +1,14 @@
 import React from 'react';
-import { ColorError } from '../Atoms/ColorError';
-import { LinkButton } from '../Atoms/LinkButton';
+import { ColorError } from '../../Atoms/ColorError';
+import { LinkButton } from '../../Atoms/LinkButton';
 import { Stack } from '@mui/system';
-import { ColorTableWihHead } from '../Atoms/ColorTableWihHead';
-import { ColorTableRow } from '../Atoms/ColorTableRow';
+import { ColorTableWihHead } from '../../Atoms/ColorTableWihHead';
+import { ColorTableRow } from '../../Atoms/ColorTableRow';
 import { Box } from '@mui/material';
 import { useModal } from 'src/providers/ModalProvider';
-import { ColorModal } from '../Atoms/ColorModal';
+import { ColorModal } from '../../Atoms/ColorModal';
 import { useSingleColor } from './useSingleColors';
-import { LoadingSpinner } from './../Atoms/LoadingSpinner';
+import { LoadingSpinner } from '../../Atoms/LoadingSpinner';
 
 export const SingleColor = () => {
   const { isLoading, colorData } = useSingleColor();
