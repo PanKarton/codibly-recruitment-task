@@ -23,9 +23,6 @@ export const ModalProvider = ({ children }: Props) => {
     setIsOpen(true);
   }, []);
   const handleCloseModal = useCallback(() => {
-    console.log(
-      'i close i close i close i close i close i close i close i close i close i close i close i close i close i close i close i close i close i close i close i close i close i close i close i close i close i close i close i close i close i close i close i close i close i close i close '
-    );
     setIsOpen(false);
   }, []);
 
