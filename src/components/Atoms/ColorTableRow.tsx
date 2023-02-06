@@ -19,6 +19,7 @@ export const ColorTableRow = ({ id, color, name, year, onClick }: Props) => {
         backgroundColor: color,
         cursor: 'pointer',
       }}
+      data-testid="table-row"
       onClick={onClick}
     >
       <TableCell component="th" scope="row">

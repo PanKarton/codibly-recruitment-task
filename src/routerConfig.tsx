@@ -1,13 +1,13 @@
 import React from 'react';
-import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { AppProvider } from './providers/AppProvider';
 import { DashboardTemplate } from './components/Templates/DashboardTemplate';
 import { ColorsTable } from './components/Molecules/ColorsTable/ColorsTable';
 import { PageNotFoundMessage } from './components/Atoms/PageNotFoundMessage';
 import { ModalProvider } from './providers/ModalProvider';
 import { SingleColor } from './components/Molecules/SingleColor/SingleColor';
+import { Navigate } from 'react-router-dom';
 
-export const router = createBrowserRouter([
+export const routerConfig = [
   {
     path: '/',
     element: <Navigate to="/colors/1" replace={true} />,
@@ -36,4 +36,4 @@ export const router = createBrowserRouter([
     path: '*',
     element: <PageNotFoundMessage />,
   },
-]);
+];

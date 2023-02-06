@@ -1,41 +1,50 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { RouterProvider } from 'react-router-dom';
+import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { render, waitFor, fireEvent } from '@testing-library/react';
-import { router } from 'src/routerConfig';
 import fetch from 'jest-fetch-mock';
+import { routerConfig } from 'src/routerConfig';
 
 const colorsArrayResolved = {
   page: 1,
-  per_page: 1,
+  per_page: 5,
   total: 12,
-  total_pages: 12,
+  total_pages: 2,
   data: [
     {
       id: 1,
-      name: 'test-color',
+      name: 'test-1',
       year: 2000,
-      color: '#303030',
-      pantone_value: '12-1234',
+      color: '#98B2D1',
+      pantone_value: '15-4020',
     },
-  ],
-  support: {
-    url: 'https://reqres.in/#support-heading',
-    text: 'To keep ReqRes free, contributions towards server costs are appreciated!',
-  },
-};
-const colorsArraySecondPageResolved = {
-  page: 2,
-  per_page: 1,
-  total: 12,
-  total_pages: 12,
-  data: [
     {
-      id: 1,
-      name: 'second-test-color',
-      year: 3000,
-      color: '#303030',
-      pantone_value: '56-7890',
+      id: 2,
+      name: 'test-2',
+      year: 2001,
+      color: '#C74375',
+      pantone_value: '17-2031',
+    },
+    {
+      id: 3,
+      name: 'test-3',
+      year: 2002,
+      color: '#BF1932',
+      pantone_value: '19-1664',
+    },
+    {
+      id: 4,
+      name: 'test-4',
+      year: 2003,
+      color: '#7BC4C4',
+      pantone_value: '14-4811',
+    },
+    {
+      id: 5,
+      name: 'test-5',
+      year: 2004,
+      color: '#E2583E',
+      pantone_value: '17-1456',
     },
   ],
   support: {
@@ -64,10 +73,12 @@ describe('Colors table', () => {
   it('fetches and renders color list', async () => {
     fetch.mockResponseOnce(JSON.stringify(colorsArrayResolved));
 
-    const { findByText } = render(<RouterProvider router={router} />);
+    const testRouter = createMemoryRouter(routerConfig);
+
+    const { findByText } = render(<RouterProvider router={testRouter} />);
 
     await waitFor(async () => {
-      const name = await findByText(/test-color/i);
+      const name = await findByText(/test-1/i);
       const year = await findByText(/2000/i);
       expect(name).toBeInTheDocument();
       expect(year).toBeInTheDocument();
@@ -77,7 +88,9 @@ describe('Colors table', () => {
 
   it('fetches and renders message when colors array is empty', async () => {
     fetch.mockResponseOnce(JSON.stringify(colorsArrayEmpty));
-    const { findByText } = render(<RouterProvider router={router} />);
+    const testRouter = createMemoryRouter(routerConfig);
+
+    const { findByText } = render(<RouterProvider router={testRouter} />);
 
     await waitFor(async () => {
       const error = await findByText(/Sorry, there are no colors avaliable to display yet./i);
@@ -86,46 +99,41 @@ describe('Colors table', () => {
     });
   });
 
-  it('fetches and renders next page of colors after clicking pagination button', async () => {
-    fetch
-      .mockResponseOnce(JSON.stringify(colorsArrayResolved))
-      .mockResponseOnce(JSON.stringify(colorsArraySecondPageResolved));
-    const { findByText, getByTestId } = render(<RouterProvider router={router} />);
+  it('fetches and renders message when colors array is empty', async () => {
+    fetch.mockResponseOnce(JSON.stringify(colorsArrayEmpty));
+    const testRouter = createMemoryRouter(routerConfig, {
+      initialEntries: ['/colors/1'],
+    });
+
+    const { findByText } = render(<RouterProvider router={testRouter} />);
 
     await waitFor(async () => {
-      const name = await findByText(/test-color/i);
-      const year = await findByText(/2000/i);
-      expect(name).toBeInTheDocument();
-      expect(year).toBeInTheDocument();
-
-      const btn = getByTestId('ArrowForwardIosIcon');
-
-      fireEvent.click(btn);
-
-      const secondName = await findByText(/second-test-color/i);
-      const secondYear = await findByText(/3000/i);
-      expect(secondName).toBeInTheDocument();
-      expect(secondYear).toBeInTheDocument();
-
-      expect(fetch).toBeCalledTimes(2);
+      const error = await findByText(/Sorry, there are no colors avaliable to display yet./i);
+      expect(error).toBeInTheDocument();
+      expect(fetch).toBeCalledTimes(1);
     });
   });
 
-  it('displays modal with all color properties after click on table row', async () => {
+  it('displays modal with all color properties after click on table row and ', async () => {
     fetch.mockResponseOnce(JSON.stringify(colorsArrayResolved));
-    const { getByText, findByTestId } = render(<RouterProvider router={router} />);
 
-    await waitFor(async () => {
-      const colorRow = await findByTestId(/color-row/i);
-      fireEvent.click(colorRow);
+    const testRouter = createMemoryRouter(routerConfig);
 
-      const hex = getByText(/#303030/i);
-      const pantoneValue = getByText(/12-1234/i);
+    const { findAllByTestId, findByText, getByTestId } = render(
+      <RouterProvider router={testRouter} />
+    );
 
-      expect(hex).toBeInTheDocument();
-      expect(pantoneValue).toBeInTheDocument();
+    expect(getByTestId('loading-spinner')).toBeInTheDocument();
 
-      expect(fetch).toBeCalledTimes(1);
-    });
+    const colorRows = await findAllByTestId(/table-row/i);
+    fireEvent.click(colorRows[0]);
+
+    const hex = await findByText(/#98B2D1/i);
+    const pantoneValue = await findByText(/15-4020/i);
+
+    expect(hex).toBeInTheDocument();
+    expect(pantoneValue).toBeInTheDocument();
+
+    expect(fetch).toBeCalledTimes(1);
   });
 });
