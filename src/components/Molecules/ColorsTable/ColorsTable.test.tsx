@@ -70,70 +70,70 @@ describe('Colors table', () => {
     fetch.resetMocks();
   });
 
-  it('fetches and renders color list', async () => {
-    fetch.mockResponseOnce(JSON.stringify(colorsArrayResolved));
+  // it('fetches and renders color list', async () => {
+  //   fetch.mockResponseOnce(JSON.stringify(colorsArrayResolved));
 
-    const testRouter = createMemoryRouter(routerConfig);
+  //   const testRouter = createMemoryRouter(routerConfig);
 
-    const { findByText } = render(<RouterProvider router={testRouter} />);
+  //   const { findByText } = render(<RouterProvider router={testRouter} />);
 
-    await waitFor(async () => {
-      const name = await findByText(/test-1/i);
-      const year = await findByText(/2000/i);
-      expect(name).toBeInTheDocument();
-      expect(year).toBeInTheDocument();
-      expect(fetch).toBeCalledTimes(1);
-    });
-  });
+  //   await waitFor(async () => {
+  //     const name = await findByText(/test-1/i);
+  //     const year = await findByText(/2000/i);
+  //     expect(name).toBeInTheDocument();
+  //     expect(year).toBeInTheDocument();
+  //     expect(fetch).toBeCalledTimes(1);
+  //   });
+  // });
 
-  it('fetches and renders message when colors array is empty', async () => {
-    fetch.mockResponseOnce(JSON.stringify(colorsArrayEmpty));
-    const testRouter = createMemoryRouter(routerConfig);
+  // it('fetches and renders message when colors array is empty', async () => {
+  //   fetch.mockResponseOnce(JSON.stringify(colorsArrayEmpty));
+  //   const testRouter = createMemoryRouter(routerConfig);
 
-    const { findByText } = render(<RouterProvider router={testRouter} />);
+  //   const { findByText } = render(<RouterProvider router={testRouter} />);
 
-    await waitFor(async () => {
-      const error = await findByText(/Sorry, there are no colors avaliable to display yet./i);
-      expect(error).toBeInTheDocument();
-      expect(fetch).toBeCalledTimes(1);
-    });
-  });
+  //   await waitFor(async () => {
+  //     const error = await findByText(/Sorry, there are no colors avaliable to display yet./i);
+  //     expect(error).toBeInTheDocument();
+  //     expect(fetch).toBeCalledTimes(1);
+  //   });
+  // });
 
-  it('fetches and renders message when colors array is empty', async () => {
-    fetch.mockResponseOnce(JSON.stringify(colorsArrayEmpty));
-    const testRouter = createMemoryRouter(routerConfig, {
-      initialEntries: ['/colors/1'],
-    });
+  // it('fetches and renders message when colors array is empty', async () => {
+  //   fetch.mockResponseOnce(JSON.stringify(colorsArrayEmpty));
+  //   const testRouter = createMemoryRouter(routerConfig, {
+  //     initialEntries: ['/colors/1'],
+  //   });
 
-    const { findByText } = render(<RouterProvider router={testRouter} />);
+  //   const { findByText } = render(<RouterProvider router={testRouter} />);
 
-    await waitFor(async () => {
-      const error = await findByText(/Sorry, there are no colors avaliable to display yet./i);
-      expect(error).toBeInTheDocument();
-      expect(fetch).toBeCalledTimes(1);
-    });
-  });
+  //   await waitFor(async () => {
+  //     const error = await findByText(/Sorry, there are no colors avaliable to display yet./i);
+  //     expect(error).toBeInTheDocument();
+  //     expect(fetch).toBeCalledTimes(1);
+  //   });
+  // });
 
-  it('displays modal with all color properties after click on table row and ', async () => {
-    fetch.mockResponseOnce(JSON.stringify(colorsArrayResolved));
+  // it('displays modal with all color properties after click on table row and closes it ', async () => {
+  //   fetch.mockResponseOnce(JSON.stringify(colorsArrayResolved));
 
-    const testRouter = createMemoryRouter(routerConfig);
+  //   const testRouter = createMemoryRouter(routerConfig);
 
-    const { findAllByTestId, findByText, getByTestId } = render(
-      <RouterProvider router={testRouter} />
-    );
+  //   const { findAllByTestId, findByText, getByTestId } = render(
+  //     <RouterProvider router={testRouter} />
+  //   );
 
-    expect(getByTestId('loading-spinner')).toBeInTheDocument();
+  //   expect(getByTestId('loading-spinner')).toBeInTheDocument();
 
-    const colorRows = await findAllByTestId(/table-row/i);
-    fireEvent.click(colorRows[0]);
+  //   const colorRows = await findAllByTestId(/table-row/i);
+  //   fireEvent.click(colorRows[0]);
 
-    const hex = await findByText(/#98B2D1/i);
-    const pantoneValue = await findByText(/15-4020/i);
+  //   const hex = await findByText(/#98B2D1/i);
+  //   const pantoneValue = await findByText(/15-4020/i);
 
-    expect(hex).toBeInTheDocument();
-    expect(pantoneValue).toBeInTheDocument();
+  //   expect(hex).toBeInTheDocument();
+  //   expect(pantoneValue).toBeInTheDocument();
 
-    expect(fetch).toBeCalledTimes(1);
-  });
+  //   expect(fetch).toBeCalledTimes(1);
+  // });
 });

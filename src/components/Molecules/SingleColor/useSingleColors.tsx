@@ -1,3 +1,4 @@
+import { log } from 'console';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { SingleColorResponse } from '../../../../types/single-color-response';
